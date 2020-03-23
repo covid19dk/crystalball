@@ -35,9 +35,15 @@ read_sst = function() {
         colnames=c("where","tested","positives","deaths","deaths_pct"),
         coltypes=c("reg2" ,"int"   ,"int"      ,"int"   , "pct"      )
       ),
+      deaths= list(
+        colnames=c("time","deaths"),
+        coltypes =c("ts1","int"),
+        droprows_rev = c(1)
+      ),
+      
       tests = list(
         colnames = c("time","tested","positives","positve_pct"),
-        coltypes = c("ts1" ,"int"     ,"int",    "pct"),
+        coltypes = c("ts1" ,"int"    ,"int",    "pct"),
         droprows_rev =c(1) 
       ),
       hospitalized_region = list(

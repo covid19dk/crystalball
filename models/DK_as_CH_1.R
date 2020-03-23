@@ -9,10 +9,11 @@ g = get_GlobalTimeline()
 h = g[g$countrycode=="CN",]
 
 ##data from https://www.worldometers.info/coronavirus/country/denmark/
-wo = wo_dk_deaths = data.table(
-  time = seq(as.Date("2020-03-14"),as.Date("2020-03-22"),by = "days"),
-  deaths = c(1,1,2,0,0,2,3,4,NA)
-)
+# wo = wo_dk_deaths = data.table(
+#   time = seq(as.Date("2020-03-11"),as.Date("2020-03-23"),by = "days"),
+#   deaths_old = c(0,0,0,1,1,2,0,0,2,3,4,NA,NA),
+#   deaths =     c(1,0,0,1,2,1,1,3,5,4,3,3,NA)
+# )
 
 plot(h$date,diff2(h$totaldeaths),log="y",col="grey",
      main="If DK follows CH after lockdown ", 
@@ -25,11 +26,12 @@ points(
 )
 
 points(
-  wo$time %>% as.POSIXlt %>% (function(x) x-(52-1)*24*3600) %>% as.Date(tz="CET"),
-  wo$deaths,col="red"  
+  s$deaths$time %>% as.POSIXlt %>% (function(x) x-(52-1)*24*3600) %>% as.Date(tz="CET"),
+  s$deaths$deaths,col="red"  
 )
-points(h$date,frollmean(diff2(h$totaldeaths),n=7,align = "center")/13,type="l",col="red")
+
 points(h$date,frollmean(diff2(h$totaldeaths),n=7,align = "center")/9,type="l",col="red")
+points(h$date,frollmean(diff2(h$totaldeaths),n=7,align = "center")/13,type="l",col="red")
 points(h$date,frollmean(diff2(h$totaldeaths)[11:(nrow(h)+10)],n=7,align = "center")/3,type="l",col="green")
 legend("bottomright",
   legend=c(
