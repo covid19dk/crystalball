@@ -73,9 +73,9 @@ danish_deaths_9  =  sum(frollmean(diff2(h$totaldeaths),n=7,align = "center")/9,n
 legend(
   "topleft",
   paste0(
-  "redlines sums to",
-  danish_deaths_13,"-",danish_deaths_9,
-  "deaths in DK given scenario holds"),
+  "redlines sums to ",
+  danish_deaths_13 %>% round," - ",danish_deaths_9 %>% round,
+  " deaths in DK during 1st wave given scenario holds (this is not a confidence interval)"),
   col="red",
   bty="n"
 )
