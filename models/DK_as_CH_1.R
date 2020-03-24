@@ -15,7 +15,7 @@ h = g[g$countrycode=="CN",]
 #   deaths =     c(1,0,0,1,2,1,1,3,5,4,3,3,NA)
 # )
 
-png("model_with_latest_numbers.png",width = 1920,height = 1080)
+png("model_with_latest_numbers.png",width = 1280,height = 720)
 
 plot(h$date,diff2(h$totaldeaths),log="y",col="grey",
      main="If DK lockdown follows pattern of CH's lockdown ", 
