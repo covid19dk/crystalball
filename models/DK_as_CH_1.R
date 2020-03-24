@@ -15,8 +15,10 @@ h = g[g$countrycode=="CN",]
 #   deaths =     c(1,0,0,1,2,1,1,3,5,4,3,3,NA)
 # )
 
+png("model_with_latest_numbers.png",width = 1920,height = 1080)
+
 plot(h$date,diff2(h$totaldeaths),log="y",col="grey",
-     main="If DK follows CH after lockdown ", 
+     main="If DK lockdown follows pattern of CH's lockdown ", 
      xlab="Timeline, after CH lockdown",
      ylab ="deaths/hospitalizations")
 points(h$date,frollmean(diff2(h$totaldeaths),n=7,align = "center"),type="l",col="grey")
@@ -27,7 +29,7 @@ points(
 
 points(
   s$deaths$time %>% as.POSIXlt %>% (function(x) x-(52-1)*24*3600) %>% as.Date(tz="CET"),
-  s$deaths$deaths,col="red"  
+  s$deaths$deaths,col="red",pch=19,cex=1.5  
 )
 
 points(h$date,frollmean(diff2(h$totaldeaths),n=7,align = "center")/9,type="l",col="red")
@@ -46,8 +48,8 @@ legend("bottomright",
   ), 
   col=c("grey","grey","red","red","green","green","orange","#FF22AA"),
   #lwd = c(1,1,1,1,1,1),
-  pch = c(1,NA,1,NA,1,NA,2,2),
-  lty = c(NA,1,NA,1,NA,1,NA,NA),cex=.8
+  pch = c(1, NA,19,NA,1 ,NA,2 ,2 ),
+  lty = c(NA,1 ,NA,1 ,NA,1 ,NA,NA),cex=.8
 )
 
 #hospitalized 7 days after infection
@@ -57,14 +59,28 @@ legend("bottomright",
 
 points(
   (s$hospitalized_icu$time-(52-1)*24*3600) %>% rev %>% as.Date(tz="CET"),
-  (s$hospitalized_icu$all %>% rev %>% diff2),col="orange",pch=2
+  (s$hospitalized_icu$all %>% rev %>% diff2),col="orange",pch=2,cex=.5
 )
 points(
   (s$hospitalized_resp$time-(52-1)*24*3600) %>% rev %>% as.Date(tz="CET"),
-  (s$hospitalized_resp$all %>% rev %>% diff2),col="#FF22AA",pch=2
+  (s$hospitalized_resp$all %>% rev %>% diff2),col="#FF22AA",pch=2,cex=.5
 )
 
 
 danish_deaths_13 =  sum(frollmean(diff2(h$totaldeaths),n=7,align = "center")/13,na.rm=TRUE)
 danish_deaths_9  =  sum(frollmean(diff2(h$totaldeaths),n=7,align = "center")/9,na.rm=TRUE)
+
+legend(
+  "topleft",
+  paste0(
+  "redlines sums to",
+  danish_deaths_13,"-",danish_deaths_9,
+  "deaths in DK given scenario holds"),
+  col="red",
+  bty="n"
+)
+
+dev.off()
+
+
 
