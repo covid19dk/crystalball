@@ -35,11 +35,11 @@ read_sst = function() {
         colnames=c("where","tested","positives","deaths","deaths_pct"),
         coltypes=c("reg2" ,"int"   ,"int"      ,"int"   , "pct"      )
       ),
-      deaths= list(
-        colnames=c("time","deaths"),
-        coltypes =c("ts1","int"),
-        droprows_rev = c(1)
-      ),
+      # deaths= list(
+      #   colnames=c("time","deaths"),
+      #   coltypes =c("ts1","int"),
+      #   droprows_rev = c(1)
+      # ),
       
       tests = list(
         colnames = c("time","tested","positives","positve_pct"),
@@ -65,6 +65,11 @@ read_sst = function() {
         coltypes=c("ts1", "int"   ,"int"   ,"int"   , "int"   ,"int"   ,"int"),
         droprows = 1
       ),
+      alders_fordeling= list(
+        colnames=c("agegroup","h_females","h_males","total","c19_total","c19_agegroup","h_subratio"),
+        coltypes=c("str"     ,"int"      ,"int"    ,"int"  , "int"     ,"int"         ,"int"),
+        droprows = 1
+      ),
       where_infected= list(
         colnames = c("country"  ,"positives"),
         coltypes = c("cou1" ,"int")
@@ -81,6 +86,8 @@ read_sst = function() {
         } 
         return(as.numeric(x))
       },
+      
+      str = function(x) as.character(x),
       
       ts1 = function(x) {
         dkmonths = c("januar","februar","marts","april","maj","juni","juli","august","september","oktober","november","december")
