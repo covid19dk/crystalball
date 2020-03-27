@@ -9,8 +9,8 @@ g = get_GlobalTimeline()
 h = g[g$countrycode=="CN",]
 
 s$deaths = data.table(
-  time = seq(as.Date("2020-03-11"),as.Date("2020-03-24"),by = "days"),
-  deaths = c(1,0,0,2,1,1,1,4,6,3,3,3,7,2)
+  time = seq(as.Date("2020-03-11"),as.Date("2020-03-26"),by = "days"),
+  deaths = c(1,0,0,2,1,1,1,4,6,3,3,3,7,5,7,8)
 )
 
 ##data from https://www.worldometers.info/coronavirus/country/denmark/
@@ -42,14 +42,14 @@ points(h$date+51,frollmean(diff2(h$totaldeaths),n=7,align = "center")/13,type="l
 points(h$date+51,frollmean(diff2(h$totaldeaths)[11:(nrow(h)+10)],n=7,align = "center")/3,type="l",col="green")
 legend("bottomright",
        legend=c(
-         "China, daily deaths",
+         "China, daily deaths  51days offset",
          "CH rollmean width=7",
-         "Denmark, daily deaths, 51days offset",
+         "Denmark, daily deaths,",
          "same CH rollmean divided by 9-13",
-         "Denmark, daily hospitalizations, 51days offset",
-         "same CH rollmean divided by 3, offset by 10 days ",
-         "DK daily increase ICU, offset 51 days",
-         "DK daily increase respirator, offset 51 days"
+         "Denmark, daily hospitalizations",
+         "same CH rollmean divided by 3, offset by 10 days less.",
+         "DK daily increase ICU",
+         "DK daily increase respirator"
        ), 
        col=c("grey","grey","red","red","green","green","orange","#FF22AA"),
        #lwd = c(1,1,1,1,1,1),

@@ -42,7 +42,7 @@ read_sst = function() {
       # ),
       
       tests = list(
-        colnames = c("time","tested","positives","positve_pct"),
+        colnames = c("time","positives","tested","positve_pct"),
         coltypes = c("ts1" ,"int"    ,"int",    "pct"),
         droprows_rev =c(1) 
       ),
@@ -66,8 +66,8 @@ read_sst = function() {
         droprows = 1
       ),
       alders_fordeling= list(
-        colnames=c("agegroup","h_females","h_males","total","c19_total","c19_agegroup","h_subratio"),
-        coltypes=c("str"     ,"int"      ,"int"    ,"int"  , "int"     ,"int"         ,"int"),
+        colnames=c("agegroup","total","h_females","h_males","h_total","h_subratio","h_subillness","h_subillness_raio"),
+        coltypes=c("str"     ,"int"      ,"int"    ,"int"  ,"int"    ,"int"       ,"int"         ,"int"),
         droprows = 1
       ),
       where_infected= list(
