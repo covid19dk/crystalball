@@ -8,9 +8,12 @@ a = get_DanishTimeline()
 g = get_GlobalTimeline()
 h = g[g$countrycode=="CN",]
 
+##data from https://www.worldometers.info/coronavirus/country/denmark/
+##data from SST.dk handcopied from figure
 s$deaths = data.table(
-  time = seq(as.Date("2020-03-11"),as.Date("2020-03-26"),by = "days"),
-  deaths = c(1,0,0,2,1,1,1,4,6,3,3,3,7,5,7,8)
+  time = seq(as.Date("2020-03-11"),as.Date("2020-03-30"),by = "days"),
+  deaths_wo = c(0,0,0,1,1,2,0,0,2,3,4,0,11,8,2,7,11,13,7,5 ),
+  deaths    = c(1,0,0,1,2,1,1,4,5,4,3,3, 7,7,7,10,11,8,NA,NA)
 )
 
 ##data from https://www.worldometers.info/coronavirus/country/denmark/
