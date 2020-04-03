@@ -10,6 +10,7 @@ read_sst = function() {
     
     #iterator tidying tables as defined in config
     s2 = lapply(seq_along(s), function(i){
+      print(i)
       dt = s[[i]]
       cfg = conf$tables[[i]]
       if(!is.null(cfg$droprows)) dt = dt[-cfg$droprows]
@@ -32,14 +33,20 @@ read_sst = function() {
   conf = list(
     tables =list(
       overall = list(
-        colnames=c("where","tested","positives","deaths","deaths_pct"),
-        coltypes=c("reg2" ,"int"   ,"int"      ,"int"   , "pct"      )
+        colnames=c("where","tested","positives","remission","deaths","deaths_pct"),
+        coltypes=c("reg2" ,"int"   ,"int"      ,"int","int"   , "pct"      )
       ),
       # deaths= list(
       #   colnames=c("time","deaths"),
       #   coltypes =c("ts1","int"),
       #   droprows_rev = c(1)
       # ),
+      
+      alders_fordeling_test= list(
+        colnames=c("agegroup","total","h_females","h_males","h_total","h_subratio","h_subillness","h_subillness_raio"),
+        coltypes=c("str"     ,"int"      ,"int"    ,"int"  ,"int"    ,"int"       ,"int"         ,"int"),
+        droprows = 1
+      ),
       
       tests = list(
         colnames = c("time","positives","tested","positve_pct"),
@@ -65,15 +72,24 @@ read_sst = function() {
         coltypes=c("ts1", "int"   ,"int"   ,"int"   , "int"   ,"int"   ,"int"),
         droprows = 1
       ),
+      
       alders_fordeling= list(
         colnames=c("agegroup","total","h_females","h_males","h_total","h_subratio","h_subillness","h_subillness_raio"),
         coltypes=c("str"     ,"int"      ,"int"    ,"int"  ,"int"    ,"int"       ,"int"         ,"int"),
         droprows = 1
       ),
-      where_infected= list(
-        colnames = c("country"  ,"positives"),
-        coltypes = c("cou1" ,"int")
+
+      # where_infected= list(
+      #   colnames = c("country"  ,"positives"),
+      #   coltypes = c("cou1" ,"int")
+      # )
+      
+      alders_fordeling= list(
+        colnames=c("week_no","positives","remission","remission_pct", "still_hospitalized","still_hospitalized_ratio","deaths","deaths_ratio"),
+        coltypes=c("str"     ,"int"      ,"int"     ,"pct"          , "int"               ,"pct"                     ,"int"   ,"pct"),
+        droprows_rev = c(1)
       )
+      
     ),
     
     types = list(

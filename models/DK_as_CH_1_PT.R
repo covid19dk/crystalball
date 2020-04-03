@@ -11,9 +11,9 @@ h = g[g$countrycode=="CN",]
 ##data from https://www.worldometers.info/coronavirus/country/denmark/
 ##data from SST.dk handcopied from figure
 s$deaths = data.table(
-  time = seq(as.Date("2020-03-11"),as.Date("2020-03-30"),by = "days"),
-  deaths_wo = c(0,0,0,1,1,2,0,0,2,3,4,0,11,8,2,7,11,13,7,5 ),
-  deaths    = c(1,0,0,1,2,1,1,4,5,4,3,3, 7,7,7,10,11,9,7,9)
+  time = seq(as.Date("2020-03-11"),as.Date("2020-03-31"),by = "days"),
+  deaths_wo = c(0,0,0,1,1,2,0,0,2,3,4,0,11,8,2,7,11,13,7,5,NA ),
+  deaths    = c(1,0,0,1,2,1,1,4,5,4,3,3, 6,6,6,10,12,9,8,10,12)
 )
 
 ##data from https://www.worldometers.info/coronavirus/country/denmark/
@@ -26,8 +26,8 @@ s$deaths = data.table(
 png("model_with_latest_numbers_presenttimeline.png",width = 1280,height = 720)
 
 plot(h$date+51,diff2(h$totaldeaths),log="y",col="grey",
-     main="If DK lockdown follows pattern of CH's lockdown ", 
-     xlab="Timeline, after CH lockdown",
+     main="If DK lockdown follows pattern of CN's lockdown ", 
+     xlab="Timeline, after CN lockdown",
      ylab ="deaths/hospitalizations")
 points(h$date+51,frollmean(diff2(h$totaldeaths),n=7,align = "center"),type="l",col="grey")
 points(
@@ -46,11 +46,11 @@ points(h$date+51,frollmean(diff2(h$totaldeaths)[11:(nrow(h)+10)],n=7,align = "ce
 legend("bottomright",
        legend=c(
          "China, daily deaths  51days offset",
-         "CH rollmean width=7",
+         "CN rollmean width=7",
          "Denmark, daily deaths,",
-         "same CH rollmean divided by 9-13",
+         "same CN rollmean divided by 9-13",
          "Denmark, daily hospitalizations",
-         "same CH rollmean divided by 3, offset by 10 days less.",
+         "same CN rollmean divided by 3, offset by 10 days less.",
          "DK daily increase ICU",
          "DK daily increase respirator"
        ), 
