@@ -42,21 +42,25 @@ read_sst = function() {
       #   droprows_rev = c(1)
       # ),
       
+      tests = list(
+        colnames = c("time","positives","tested","positve_pct"),
+        coltypes = c("ts1" ,"int"    ,"int",    "pct"),
+        droprows_rev =c(1) 
+      ),
+      
+ 
+      hospitalized_region = list(
+        colnames = c("region","all","icu","resp"),
+        coltypes = c("reg1"  ,"int","int","int" )
+      ),
+      
       alders_fordeling_test= list(
         colnames=c("agegroup","total","h_females","h_males","h_total","h_subratio","h_subillness","h_subillness_raio"),
         coltypes=c("str"     ,"int"      ,"int"    ,"int"  ,"int"    ,"int"       ,"int"         ,"int"),
         droprows = 1
       ),
       
-      tests = list(
-        colnames = c("time","positives","tested","positve_pct"),
-        coltypes = c("ts1" ,"int"    ,"int",    "pct"),
-        droprows_rev =c(1) 
-      ),
-      hospitalized_region = list(
-        colnames = c("region","all","icu","resp"),
-        coltypes = c("reg1"  ,"int","int","int" )
-      ),
+      
       hospitalized_any = list(
         colnames=c("time","reg_NJ","reg_MJ","reg_SD","reg_HS","reg_SJ","all"),
         coltypes=c("ts1", "int"   ,"int"   ,"int"   , "int"   ,"int"   ,"int"),
@@ -74,21 +78,24 @@ read_sst = function() {
       ),
       
       alders_fordeling= list(
+        colnames=c("week_no","positives","remission","remission_pct", "still_hospitalized","still_hospitalized_ratio","deaths","deaths_ratio"),
+        coltypes=c("str"     ,"int"      ,"int"     ,"pct"          , "int"               ,"pct"                     ,"int"   ,"pct"),
+        droprows_rev = c(1)
+      ),
+      
+      
+      alders_fordeling= list(
         colnames=c("agegroup","total","h_females","h_males","h_total","h_subratio","h_subillness","h_subillness_raio"),
         coltypes=c("str"     ,"int"      ,"int"    ,"int"  ,"int"    ,"int"       ,"int"         ,"int"),
         droprows = 1
-      ),
+      )
 
       # where_infected= list(
       #   colnames = c("country"  ,"positives"),
       #   coltypes = c("cou1" ,"int")
       # )
       
-      alders_fordeling= list(
-        colnames=c("week_no","positives","remission","remission_pct", "still_hospitalized","still_hospitalized_ratio","deaths","deaths_ratio"),
-        coltypes=c("str"     ,"int"      ,"int"     ,"pct"          , "int"               ,"pct"                     ,"int"   ,"pct"),
-        droprows_rev = c(1)
-      )
+      
       
     ),
     
@@ -146,3 +153,4 @@ read_sst = function() {
   
   return(s2)
 }
+
